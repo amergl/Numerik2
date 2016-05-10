@@ -50,20 +50,40 @@ def make_plot(h_b, h_m, l_e, l_r, phi, h_r, h, b, b_top, b_bottom, psi, alpha, b
     plt.clf()
     plt.close() 
     plt.axis((-0.5,h_b+0.5,-1.5*b,1.5*b))
-    pointpsix, pointpsiy = plot_line(0,0,get_rad(0),h_b, name="hb")
+    # untere Bodenlinie
+    pointpsix, pointpsiy = plot_line(0,0,get_rad(0),h_b, name="hb", color='k-')
+    plt.plot(h_b,0,'kx')
+    plt.text(h_b,-0.3,'h_b')
+    # Wand
     topx,topy = plot_line(pointpsix,pointpsiy,pi-psi,1.3*b, plot=False)
-    plot_line(topx,topy,2*pi-psi,2.6*b)
-    pointphix,pointphiy = plot_line(0,0,get_rad(0),h_m, name="hm")
+    plot_line(topx,topy,2*pi-psi,2.6*b, color='k-')
+    # Abstand bis Drehteller vom Ursprung
+    pointphix,pointphiy = plot_line(0,0,get_rad(0),h_m, name="hm", color='k-')
+    plt.plot(h_m,0,'kx')
+    plt.text(h_m,-0.3,'h_m')
     #plot_line(h_m,0,phi,l_e)
-    pointbx, pointby = plot_line(0,0,alpha,h, name="h")
-    pointrx, pointry = plot_line(0,0,alpha,h_r, name="hr")
+    # Winkelhalbierende
+    pointbx, pointby = plot_line(0,0,alpha,h, name="h", color='g-')
+    #Winkelhalbierende bis Kreismittelpunkt
+    pointrx, pointry = plot_line(0,0,alpha,h_r, name="hr", color = 'b-')
+    # b an Wand
     btopx,btopy = plot_line(pointbx,pointby,pi-psi,b_top, plot=False)
-    plot_line(btopx,btopy,2*pi-psi,b, name="b")
+    plot_line(btopx,btopy,2*pi-psi,b, name="b", color='r-')
     bbottomx,bbottomy = plot_line(pointbx,pointby,2*pi-psi,b_bottom, plot=False)
-    plt.plot((0,bbottomx),(0,bbottomy),'k-.')
-    plt.plot((0,btopx),(0,btopy),'k-.')
+    # unterer Scheitel
+    plt.plot((0,bbottomx),(0,bbottomy),'c-.')
+    plt.plot(bbottomx,bbottomy, 'kx')
+    # oberer Scheitel
+    plt.plot((0,btopx),(0,btopy),'c-.')
+    plt.plot(btopx,btopy, 'kx')
+    # Drehteller
     circlele=plt.Circle((pointphix,pointphiy),l_e,color='k',linestyle='dashed',fill=False)
+    # Zylinder
     circler=plt.Circle((pointrx,pointry),l_r,color='k',fill=False)
+    # Abstand Mitte Drehteller, Mitte Zylinder
+    plt.plot((h_m, pointrx), (0, pointry), 'y-', label='l_e')
+    plt.plot(pointrx,pointry, 'kx')
+    plt.text(pointrx,pointry-0.3,'M')
     fig = plt.gcf()
     ax = plt.gca()
     fig.gca().add_artist(circlele)
@@ -72,11 +92,11 @@ def make_plot(h_b, h_m, l_e, l_r, phi, h_r, h, b, b_top, b_bottom, psi, alpha, b
     plt.legend()
     plt.show()
 
-def plot_line(pointx, pointy, angle, distance, plot=True, name=None):
+def plot_line(pointx, pointy, angle, distance, plot=True, name=None, color='-'):
     x = cos(angle)*distance+pointx
     y = sin(angle)*distance+pointy
     if plot:
-        plt.plot((pointx,x),(pointy,y),'-', label=name)
+        plt.plot((pointx,x),(pointy,y),color, label=name)
     return x,y
 
 def get_rad(angle):
@@ -90,6 +110,7 @@ def main(
     delta_phi = 0,
     psi = pi/2,
     h_b = 4):
+    
     phi = delta_phi + phi_0
     h_r = get_h_r(l_e, h_m, phi)
     alpha = get_alpha(l_e, phi, h_r)
@@ -105,12 +126,11 @@ def main(
     
 
 if __name__ == "__main__":
-    main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(0), psi=get_rad(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(45), psi=get_rad(75), h_b=8) 
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(90), psi=get_rad(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(135), psi=get_rad(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(180), psi=get_rad(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(225), psi=get_rad(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(270), psi=get_rad(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(315), psi=get_rad(75), h_b=8)
-    quit()
+    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(0), psi=get_rad(75), h_b=20)
+#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(45), psi=get_rad(75), h_b=20) 
+#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(90), psi=get_rad(75), h_b=20)
+#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(135), psi=get_rad(75), h_b=20)
+#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(180), psi=get_rad(75), h_b=20)
+#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(225), psi=get_rad(75), h_b=20)
+#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(270), psi=get_rad(75), h_b=20)
+#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(315), psi=get_rad(75), h_b=20)

@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr 26 10:57:29 2016
-
-@author: studi
-"""
+#!/usr/bin/env python
 
 from numpy import *
 import matplotlib.pyplot as plt
@@ -51,14 +46,14 @@ def make_plot(h_b, h_m, l_e, l_r, phi, h_r, h, b, b_top, b_bottom, psi, alpha, b
     plt.close() 
     plt.axis((-0.5,h_b+0.5,-1.5*b,1.5*b))
     # untere Bodenlinie
-    pointpsix, pointpsiy = plot_line(0,0,get_rad(0),h_b, name="hb", color='k-')
+    pointpsix, pointpsiy = plot_line(0,0,radians(0),h_b, name="hb", color='k-')
     plt.plot(h_b,0,'kx')
     plt.text(h_b,-0.3,'h_b')
     # Wand
     topx,topy = plot_line(pointpsix,pointpsiy,pi-psi,1.3*b, plot=False)
     plot_line(topx,topy,2*pi-psi,2.6*b, color='k-')
     # Abstand bis Drehteller vom Ursprung
-    pointphix,pointphiy = plot_line(0,0,get_rad(0),h_m, name="hm", color='k-')
+    pointphix,pointphiy = plot_line(0,0,radians(0),h_m, name="hm", color='k-')
     plt.plot(h_m,0,'kx')
     plt.text(h_m,-0.3,'h_m')
     #plot_line(h_m,0,phi,l_e)
@@ -99,14 +94,11 @@ def plot_line(pointx, pointy, angle, distance, plot=True, name=None, color='-'):
         plt.plot((pointx,x),(pointy,y),color, label=name)
     return x,y
 
-def get_rad(angle):
-    return angle/180.*pi
-    
 def main(
     l_e = 1,
     l_r = 0.5,
     h_m = 2,
-    phi_0 = get_rad(180),
+    phi_0 = radians(180),
     delta_phi = 0,
     psi = pi/2,
     h_b = 4):
@@ -126,6 +118,7 @@ def main(
     
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(0), psi=get_rad(75), h_b=20)
 #    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(45), psi=get_rad(75), h_b=20) 
 #    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(90), psi=get_rad(75), h_b=20)
@@ -134,3 +127,14 @@ if __name__ == "__main__":
 #    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(225), psi=get_rad(75), h_b=20)
 #    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(270), psi=get_rad(75), h_b=20)
 #    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(315), psi=get_rad(75), h_b=20)
+=======
+    main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(0), psi=radians(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(45), psi=radians(75), h_b=8) 
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(90), psi=radians(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(135), psi=radians(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(180), psi=radians(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(225), psi=radians(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(270), psi=radians(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(315), psi=radians(75), h_b=8)
+    quit()
+>>>>>>> 00841f9fbe7308d30eafb0292ad7589e9af8e7f5

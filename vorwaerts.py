@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr 26 10:57:29 2016
-
-@author: studi
-"""
+#!/usr/bin/env python
 
 from numpy import *
 import matplotlib.pyplot as plt
@@ -50,10 +45,10 @@ def make_plot(h_b, h_m, l_e, l_r, phi, h_r, h, b, b_top, b_bottom, psi, alpha, b
     plt.clf()
     plt.close() 
     plt.axis((-0.5,h_b+0.5,-1.5*b,1.5*b))
-    pointpsix, pointpsiy = plot_line(0,0,get_rad(0),h_b, name="hb")
+    pointpsix, pointpsiy = plot_line(0,0,radians(0),h_b, name="hb")
     topx,topy = plot_line(pointpsix,pointpsiy,pi-psi,1.3*b, plot=False)
     plot_line(topx,topy,2*pi-psi,2.6*b)
-    pointphix,pointphiy = plot_line(0,0,get_rad(0),h_m, name="hm")
+    pointphix,pointphiy = plot_line(0,0,radians(0),h_m, name="hm")
     #plot_line(h_m,0,phi,l_e)
     pointbx, pointby = plot_line(0,0,alpha,h, name="h")
     pointrx, pointry = plot_line(0,0,alpha,h_r, name="hr")
@@ -79,14 +74,11 @@ def plot_line(pointx, pointy, angle, distance, plot=True, name=None):
         plt.plot((pointx,x),(pointy,y),'-', label=name)
     return x,y
 
-def get_rad(angle):
-    return angle/180.*pi
-    
 def main(
     l_e = 1,
     l_r = 0.5,
     h_m = 2,
-    phi_0 = get_rad(180),
+    phi_0 = radians(180),
     delta_phi = 0,
     psi = pi/2,
     h_b = 4):
@@ -105,12 +97,12 @@ def main(
     
 
 if __name__ == "__main__":
-    main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(0), psi=get_rad(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(45), psi=get_rad(75), h_b=8) 
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(90), psi=get_rad(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(135), psi=get_rad(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(180), psi=get_rad(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(225), psi=get_rad(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(270), psi=get_rad(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(315), psi=get_rad(75), h_b=8)
+    main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(0), psi=radians(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(45), psi=radians(75), h_b=8) 
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(90), psi=radians(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(135), psi=radians(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(180), psi=radians(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(225), psi=radians(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(270), psi=radians(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(315), psi=radians(75), h_b=8)
     quit()

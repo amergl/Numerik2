@@ -118,23 +118,11 @@ def main(
     
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(0), psi=get_rad(75), h_b=20)
-#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(45), psi=get_rad(75), h_b=20) 
-#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(90), psi=get_rad(75), h_b=20)
-#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(135), psi=get_rad(75), h_b=20)
-#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(180), psi=get_rad(75), h_b=20)
-#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(225), psi=get_rad(75), h_b=20)
-#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(270), psi=get_rad(75), h_b=20)
-#    main(l_e=2, l_r=1, h_m=8, phi_0=get_rad(135), delta_phi=get_rad(315), psi=get_rad(75), h_b=20)
-=======
-    main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(0), psi=radians(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(45), psi=radians(75), h_b=8) 
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(90), psi=radians(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(135), psi=radians(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(180), psi=radians(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(225), psi=radians(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(270), psi=radians(75), h_b=8)
-    #main(l_e=2, l_r=1, h_m=3.5, phi_0=radians(135), delta_phi=radians(315), psi=radians(75), h_b=8)
-    quit()
->>>>>>> 00841f9fbe7308d30eafb0292ad7589e9af8e7f5
+    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(0), psi=radians(75), h_b=20)
+#    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(45), psi=radians(75), h_b=20) 
+#    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(90), psi=radians(75), h_b=20)
+#    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(135), psi=radians(75), h_b=20)
+#    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(180), psi=radians(75), h_b=20)
+#    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(225), psi=radians(75), h_b=20)
+#    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(270), psi=radians(75), h_b=20)
+#    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(315), psi=radians(75), h_b=20)

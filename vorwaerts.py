@@ -80,7 +80,7 @@ def plot_line(pointx, pointy, angle, distance, plot=True, name=None):
     return x,y
 
 def get_rad(angle):
-    return angle/180*pi
+    return angle/180.*pi
     
 def main(
     l_e = 1,
@@ -106,11 +106,11 @@ def main(
 
 if __name__ == "__main__":
     main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(0), psi=get_rad(75), h_b=8)
-    main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(45), psi=get_rad(75), h_b=8) 
-    main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(90), psi=get_rad(75), h_b=8)
-    main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(135), psi=get_rad(75), h_b=8)
-    main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(180), psi=get_rad(75), h_b=8)
-    main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(225), psi=get_rad(75), h_b=8)
-    main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(270), psi=get_rad(75), h_b=8)
-    main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(315), psi=get_rad(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(45), psi=get_rad(75), h_b=8) 
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(90), psi=get_rad(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(135), psi=get_rad(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(180), psi=get_rad(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(225), psi=get_rad(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(270), psi=get_rad(75), h_b=8)
+    #main(l_e=2, l_r=1, h_m=3.5, phi_0=get_rad(135), delta_phi=get_rad(315), psi=get_rad(75), h_b=8)
     quit()

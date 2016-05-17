@@ -2,3 +2,6 @@
 *.swp
 *.py~
 *.pyc
+*.aux
+*.log
+*.synctex.gz

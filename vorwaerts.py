@@ -41,6 +41,9 @@ def get_b_top(h,beta,gamma):
 def get_b(h,beta,gamma):
     return get_b_top(h,beta,gamma) + get_b_bottom(h,beta,gamma)
     
+def get_b2(l_r, l_e, h_m, h_b, phi, psi):
+    return (1./(sin(arcsin(l_r/sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi)))+arcsin(l_e*sin(phi)/sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi)))+psi)) + (l_r/sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi)))/(0.5*(sqrt(1-(l_r/sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi)))**2)-cos(2*arcsin(l_e*sin(phi)/sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi)))+2*psi-arcsin(l_r/sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi)))))))*(sin(phi)*h_b)
+    
 def make_plot(h_b, h_m, l_e, l_r, phi, h_r, h, b, b_top, b_bottom, psi, alpha, beta, gamma):
     plt.clf()
     plt.close() 
@@ -112,7 +115,9 @@ def main(
     b_bottom = get_b_bottom(h,beta,gamma)
     b_top = get_b_top(h,beta,gamma)
     b = get_b(h, beta, gamma)
+    b2 = get_b2(l_r, l_e, h_m, h_b, phi, psi)
     print(b)
+    print(b2)
     make_plot(h_b, h_m, l_e, l_r, phi, h_r, h, b, b_top, b_bottom, psi, alpha, beta, gamma)
     
     

@@ -25,6 +25,7 @@ b_{bottom} = \frac{sin(\gamma)}{sin(\delta)}\cdot h\\
 b_{top} = \frac{sin(\epsilon)}{sin(\zeta)}\cdot h\\
 b = b_{top} + b_{bottom}
 \end{align*}
+\newpage
 
 \begin{align*}
 \begin{split}
@@ -33,6 +34,7 @@ b (l_r, l_e, h_m, h_b, \phi, \psi) =\\ \bigg(\frac{sin\left(arcsin\left(\frac{l_
 \cdot\bigg(\frac{sin(\phi) * h_b}{sin(\pi - arcsin(\frac{l_e * sin(\phi)}{\sqrt{l_e ^2 + h_m^2 - 2*l_e*h_m * cos(\phi)}}) - \psi)}\bigg)
 \end{split}
 \end{align*}
+\newpage
 
 \begin{align*}
 	\begin{split}
@@ -40,6 +42,16 @@ b (l_r, l_e, h_m, h_b, \phi, \psi) =\\ \bigg(\frac{sin\left(arcsin\left(\frac{l_
 		\bigg[\frac{1}{-sin(-arcsin(\frac{l_r}{\sqrt{l_e ^2 + h_m^2 - 2*l_e*h_m * cos(\phi)}}) - arcsin(\frac{l_e * sin(\phi)}{\sqrt{l_e ^2 + h_m^2 - 2*l_e*h_m * cos(\phi)}}) - \psi)}\\ 
 		+ \frac{\frac{l_r}{\sqrt{l_e ^2 + h_m^2 - 2*l_e*h_m * cos(\phi)}}}{\frac{1}{2} * \left( \sqrt{1- \left(\frac{l_r}{\sqrt{l_e ^2 + h_m^2 - 2*l_e*h_m * cos(\phi)}}\right)^2} - cos(2*arcsin(\frac{l_e * sin(\phi)}{\sqrt{l_e ^2 + h_m^2 - 2*l_e*h_m * cos(\phi)}}) + 2* \psi - arcsin(\frac{l_r}{\sqrt{l_e ^2 + h_m^2 - 2*l_e*h_m * cos(\phi)}})) \right)}\bigg]\\
 		\cdot\bigg(sin(\phi) * h_b\bigg)
+	\end{split}
+\end{align*}
+\newpage
+
+\begin{align*}
+	\begin{split}
+		b (l_r, l_e, h_m, h_b, \phi, \psi) =\\ 
+		\bigg[\frac{1}{- \sqrt{1 - \left(\frac{l_r}{\sqrt{l_e^2 + h_m^2 - 2l_eh_m\cdot cos(\phi)}}\right)^2} + cos(2 * arcsin(\frac{l_e * sin(\phi)}{\sqrt{l_e^2 + h_m^2 - 2l_eh_m\cdot cos(\phi)}}) + 2 * \psi - arcsin(\frac{l_r}{\sqrt{l_e^2 + h_m^2 - 2l_eh_m\cdot cos(\phi)}}))}\\ 
+		+ \frac{1}{\sqrt{1- \left(\frac{l_r}{\sqrt{l_e ^2 + h_m^2 - 2*l_e*h_m * cos(\phi)}}\right)^2} - cos(2*arcsin(\frac{l_e * sin(\phi)}{\sqrt{l_e ^2 + h_m^2 - 2*l_e*h_m * cos(\phi)}}) + 2* \psi - arcsin(\frac{l_r}{\sqrt{l_e ^2 + h_m^2 - 2*l_e*h_m * cos(\phi)}}))}\bigg]\\
+		\cdot\bigg(2 * \frac{l_r}{\sqrt{l_e ^2 + h_m^2 - 2*l_e*h_m * cos(\phi)}} * sin(\phi) * h_b\bigg)
 	\end{split}
 \end{align*}
 

@@ -6,25 +6,32 @@ from jacobi import *
 from vorwaerts import *
 
 
-def newton(F,x0,eps=1e-5):
+def newton(F,x0,eps=1e-5,alpha=1e-3):
     it=int(1e5)
     x=x0
     Fx=F(x)
     residuum=linalg.norm(Fx,inf)
     while residuum > eps and it > 0:
         dFx=jacobi(F,x)
-        x-=linalg.solve(100*dot(dFx.T,dFx),dot(dFx.T,Fx))
+
+        #tikhonov regularisation
+
+        A=dot(dFx.T,dFx)
+        R=dot(linalg.inv(dot(A.T,A) + alpha*eye(A.shape[0])),A.T)
+        x-=dot(R,dot(dFx.T,Fx))
+        
+        #x-=linalg.solve(dot(dFx.T,dFx),dot(dFx.T,Fx))
         Fx=F(x)
         it-=1
         residuum=linalg.norm(Fx,inf)
-        print residuum
+        print residuum,x
 
     if it == 0:
         residuum=-1
     return x, residuum
 
 def rueckwaerts(inp,exact):
-    F=lambda x: array([vorwaerts(i[0],x)-i[1] for i in inp],dtype=float64)
+    F=lambda x: array([vorwaerts_explicit(i[0],x)-i[1] for i in inp],dtype=float64)
     x0=array([1,0.5,2.,radians(88),radians(88),2.],dtype=float64)
     x,residuum=newton(F,x0)
     print "Error = %f"%(linalg.norm(exact-x))

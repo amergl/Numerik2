@@ -42,7 +42,11 @@ def get_b(h,beta,gamma):
     return get_b_top(h,beta,gamma) + get_b_bottom(h,beta,gamma)
     
 def get_b2(l_r, l_e, h_m, h_b, phi, psi):
-    return (1./(cos(2*arcsin(l_e * sin(phi) / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi))) + 2 * psi - arcsin(l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))) - sqrt(1 - (l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))**2)) + 1./(sqrt(1 - (l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))**2) - cos(2*arcsin(l_e * sin(phi) / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi))) + 2 * psi - arcsin(l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))))) + (2 * sin(phi) * h_b * l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))
+    return (2*sin(phi)*h_b*l_r/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi))))*(1./(sqrt(1-(l_r/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi))))**2)-cos(2*arcsin(l_e*sin(phi)/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi))))+2*psi+arcsin(l_r/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi))))))+1./(sqrt(1-(l_r/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi))))**2)-cos(2*arcsin(l_e*sin(phi)/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi))))+2*psi-arcsin(l_r/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi)))))))    
+    
+    '''return (1./(cos(2*arcsin(l_e * sin(phi) / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi))) + 2 * psi - arcsin(l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))) - sqrt(1 - (l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))**2)) + 1./(sqrt(1 - (l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))**2) - cos(2*arcsin(l_e * sin(phi) / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi))) + 2 * psi - arcsin(l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))))) + (2 * sin(phi) * h_b * l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))'''
+    
+    
     
 def make_plot(h_b, h_m, l_e, l_r, phi, h_r, h, b, b_top, b_bottom, psi, alpha, beta, gamma):
     plt.clf()
@@ -98,13 +102,13 @@ def plot_line(pointx, pointy, angle, distance, plot=True, name=None, color='-'):
     return x,y
 
 def main(
-    l_e = 1,
+    l_e = 1.,
     l_r = 0.5,
-    h_m = 2,
+    h_m = 2.,
     phi_0 = radians(180),
-    delta_phi = 0,
+    delta_phi = radians(0),
     psi = pi/2,
-    h_b = 4):
+    h_b = 4.):
     
     phi = delta_phi + phi_0
     h_r = get_h_r(l_e, h_m, phi)
@@ -125,11 +129,11 @@ def main(
     
 
 if __name__ == "__main__":
-    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(0), psi=radians(75), h_b=20)
-    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(45), psi=radians(75), h_b=20) 
-    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(90), psi=radians(75), h_b=20)
-    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(135), psi=radians(75), h_b=20)
-    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(180), psi=radians(75), h_b=20)
-    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(225), psi=radians(75), h_b=20)
-    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(270), psi=radians(75), h_b=20)
-    main(l_e=2, l_r=1, h_m=8, phi_0=radians(135), delta_phi=radians(315), psi=radians(75), h_b=20)
+    main(l_e=2., l_r=1., h_m=8., phi_0=radians(135), delta_phi=radians(0), psi=radians(75), h_b=20.)
+    main(l_e=2., l_r=1., h_m=8., phi_0=radians(135), delta_phi=radians(45), psi=radians(75), h_b=20.) 
+    main(l_e=2., l_r=1., h_m=8., phi_0=radians(135), delta_phi=radians(90), psi=radians(75), h_b=20.)
+    main(l_e=2., l_r=1., h_m=8., phi_0=radians(135), delta_phi=radians(135), psi=radians(75), h_b=20.)
+    main(l_e=2., l_r=1., h_m=8., phi_0=radians(135), delta_phi=radians(180), psi=radians(75), h_b=20.)
+    main(l_e=2., l_r=1., h_m=8., phi_0=radians(135), delta_phi=radians(225), psi=radians(75), h_b=20.)
+    main(l_e=2., l_r=1., h_m=8., phi_0=radians(135), delta_phi=radians(270), psi=radians(75), h_b=20.)
+    main(l_e=2., l_r=1., h_m=8., phi_0=radians(135), delta_phi=radians(315), psi=radians(75), h_b=20.)

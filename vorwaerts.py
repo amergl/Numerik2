@@ -61,3 +61,14 @@ def vorwaerts(
     b_top = get_b_top(h,beta,gamma)
     b = get_b(h, beta, gamma)
     return b
+    
+def vorwaerts_explicit(delta_phi = 0,
+	x=[1, #l_e
+    0.5, #l_r
+    2, #h_m
+    radians(180), #phi_0
+    pi/2, #psi
+    4] #h_b
+	):
+	
+	return (sin(arcsin(x[1]/sqrt(x[0] **2 + x[2]**2 - 2*x[0]*x[2] * cos((x[3] + delta_phi)))))/sin(pi-arcsin(x[1]/sqrt(x[0] **2 + x[2]**2 - 2*x[0]*x[2] * cos((x[3] + delta_phi))))-(pi-(pi - arcsin(x[0] * sin((x[3] + delta_phi))/sqrt(x[0] **2 + x[2]**2 - 2*x[0]*x[2] * cos((x[3] + delta_phi)))) - x[4]))) + sin(arcsin(x[1]/sqrt(x[0] **2 + x[2]**2 - 2*x[0]*x[2] * cos((x[3] + delta_phi)))))/sin(pi-(pi - arcsin(x[0] * sin((x[3] + delta_phi))/sqrt(x[0] **2 + x[2]**2 - 2*x[0]*x[2] * cos((x[3] + delta_phi)))) - x[4])-arcsin(x[1]/sqrt(x[0] **2 + x[2]**2 - 2*x[0]*x[2] * cos((x[3] + delta_phi)))))) * (sin(x[4]) * x[5] / sin((pi - arcsin(x[0] * sin((x[3] + delta_phi))/sqrt(x[0] **2 + x[2]**2 - 2*x[0]*x[2] * cos((x[3] + delta_phi)))) - x[4]))) #sry fuer haesslich :(

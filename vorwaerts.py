@@ -42,13 +42,7 @@ def get_b(h,beta,gamma):
     return get_b_top(h,beta,gamma) + get_b_bottom(h,beta,gamma)
     
 def get_b2(l_r, l_e, h_m, h_b, phi, psi):
-    '''return (2*sin(phi)*h_b*l_r/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi)))) * (1./(sqrt(1-(l_r/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi))))**2)-cos(2*arcsin(l_e*sin(phi)/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi))))+2*psi+arcsin(l_r/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi)))))) 
-    +
-    1./(sqrt(1-(l_r/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi))))**2)-cos(2*arcsin(l_e*sin(phi)/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi))))+2*psi-arcsin(l_r/(sqrt(l_e**2+h_m**2-2*l_e*h_m*cos(phi)))))))   ''' 
-    
-    
-    '''return (1./(cos(2*arcsin(l_e * sin(phi) / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi))) + 2 * psi - arcsin(l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))) - sqrt(1 - (l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))**2)) + 1./(sqrt(1 - (l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))**2) - cos(2*arcsin(l_e * sin(phi) / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi))) + 2 * psi - arcsin(l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))))) + (2 * sin(phi) * h_b * l_r / sqrt(l_e**2 + h_m**2-2+l_e*h_m*cos(phi)))'''
-    return (sin(arcsin(1.0*l_r/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi))))/sin(pi- arcsin(l_r/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi))) - pi - (pi - arcsin(l_e * sin(phi)/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi))) - psi)))*(sin(psi) * h_b / sin((pi - arcsin(l_e * sin(phi)/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi))) - psi))) + (sin(arcsin(l_r/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi))))/sin(pi - (pi - arcsin(l_e * sin(phi)/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi))) - psi) -arcsin(l_r/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi)))))*(sin(psi) * h_b / sin((pi - arcsin(l_e * sin(phi)/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi))) - psi)))
+    return (sin(arcsin(l_r/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi))))/sin(pi-arcsin(l_r/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi)))-(pi-(pi - arcsin(l_e * sin(phi)/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi))) - psi))) + sin(arcsin(l_r/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi))))/sin(pi-(pi - arcsin(l_e * sin(phi)/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi))) - psi)-arcsin(l_r/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi))))) * (sin(psi) * h_b / sin((pi - arcsin(l_e * sin(phi)/sqrt(l_e **2 + h_m**2 - 2*l_e*h_m * cos(phi))) - psi)))
     
     
     

@@ -24,23 +24,41 @@ def newton(F,x0,eps=1e-5,alpha=1.05e-4):
 
         Fx=F(x)
         it-=1
-        residuum=linalg.norm(Fx,inf)
+        residuum2=linalg.norm(Fx,inf)
+#	if residuum2-residuum > 0:
+#            alpha/=10
+#	    print
+#        elif abs(residuum2/residuum) > 0.9:
+#	    alpha/=10
+#	    print "elif"
+#        elif residuum/residuum2 < 1e2:
+#	    alpha*=5
+#	    print "else"
+        alpha=min(5e-5,residuum2/residuum)
+	residuum=residuum2
+	print residuum
     if it == 0:
         residuum=-1
     return x, residuum
 
-def rueckwaerts(inp,exact):
-    F=lambda x: array([vorwaerts_explicit(i[0],x)-i[1] for i in inp],dtype=float64)
-    x0=array([1,0.5,2.,radians(88),radians(88),2.],dtype=float64)
-    x,residuum=newton(F,x0)
+def rueckwaerts(n,x,l_r):
+    #x=[2,8,radians(171),radians(90),20]
+    inp=array([[radians(float(i)/n * 360),vorwaerts(radians(float(i)/n * 360),x=x, l_r=l_r)] for i in range(n+1)],dtype=float64)
+    F=lambda x: array([vorwaerts(i[0],x,l_r)-i[1] for i in inp],dtype=float64)
+    #x0=array([1,2.,radians(88),radians(88),2.],dtype=float64)
+    x0=array([1.7,6.,radians(120),radians(88),15],dtype=float64)
+    
+    x,residuum=newton(F,x0, alpha=5e-4)
     print x
     return residuum
 
 if __name__ == "__main__":
     n=10
-    x=[1,0.5,2,radians(90),radians(87),4]
-    inp=array([[radians(float(i)/n * 360),vorwaerts(radians(float(i)/n * 360),x)] for i in range(n+1)],dtype=float64)
-    residuum=rueckwaerts(inp,x)
+    #x=[1,2,radians(90),radians(87),4]
+    #l_r=0.5
+    l_r = 1
+    x=[2,8,radians(171),radians(90),20]
+    residuum=rueckwaerts(n,x,l_r)
     print "X actually is",x
     print "Residuum is",residuum
     

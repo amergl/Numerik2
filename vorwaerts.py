@@ -44,19 +44,19 @@ def get_b(h,beta,gamma):
 def vorwaerts(
     delta_phi = 0,
     x=[1, #l_e
-    0.5, #l_r
     2, #h_m
     radians(180), #phi_0
     pi/2, #psi
-    4] #h_b
+    4], #h_b
+    l_r = 0.5
 	):
     
-    phi = delta_phi + x[3]
-    h_r = get_h_r(x[0], x[2], phi)
+    phi = delta_phi + x[2]
+    h_r = get_h_r(x[0], x[1], phi)
     alpha = get_alpha(x[0], phi, h_r)
-    beta = get_beta(alpha, x[4])
-    h = get_h(x[4], x[5], beta)
-    gamma = get_gamma(x[1], h_r)
+    beta = get_beta(alpha, x[3])
+    h = get_h(x[3], x[4], beta)
+    gamma = get_gamma(l_r, h_r)
     b_bottom = get_b_bottom(h,beta,gamma)
     b_top = get_b_top(h,beta,gamma)
     b = get_b(h, beta, gamma)

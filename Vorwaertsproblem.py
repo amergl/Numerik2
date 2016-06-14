@@ -5,7 +5,7 @@ import vorwaerts as vw
 
 class Vorwaertsproblem():
     
-    def __init__(self, l_e=10, l_r=3, h_m=30, h_b=90, phi_0=135, delta_phi=45, psi=90):
+    def __init__(self, l_e=10, l_r=3, h_m=30, h_b=90, phi_0=135, delta_phi=45, psi=90, show_legend=True):
         self.l_e = l_e
         self.l_r = l_r
         self.h_m = h_m
@@ -13,6 +13,7 @@ class Vorwaertsproblem():
         self.phi = phi_0
         self.delta_phi = delta_phi 
         self.psi = psi 
+        self.show_legend = show_legend
         
     def initUI(self):
         self.fig, self.ax = plt.subplots()
@@ -122,7 +123,8 @@ class Vorwaertsproblem():
         self.ax.plot((0, btopx), (0, btopy), 'c-.')
         self.ax.plot(btopx, btopy, 'kx')
         self.ax.axis('equal')
-        self.ax.legend()
+        if self.show_legend:
+            self.ax.legend()
         
     def plot_line(self, pointx, pointy, angle, distance, plot=True, name=None, color='-'):
         x = np.cos(angle)*distance+pointx

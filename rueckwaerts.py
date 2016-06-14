@@ -47,6 +47,16 @@ def rueckwaerts(n,x,l_r):
     x,residuum=newton(F,x0, alpha=5e-4)
     print x
     return residuum
+    
+def print_x(x):    
+#    print("Param \tValue")
+    print("-------------------------------")
+    print("l_e: \t{l_e}".format(l_e=x[0]))
+    print("h_m: \t{h_m}".format(h_m=x[1]))
+    print("phi_0: \trad={phi_0}, deg={deg}".format(phi_0=x[2], deg=degrees(x[2])))
+    print("psi: \trad={psi}, deg={deg}".format(psi=x[3], deg=degrees(x[3])))
+    print("h_b: \t{h_b}".format(h_b=x[4]))
+    print("")
 
 if __name__ == "__main__":
     n=30

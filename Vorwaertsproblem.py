@@ -88,40 +88,58 @@ class Vorwaertsproblem():
         b_top = vw.get_b_top(h, beta, gamma)
         b = vw.get_b(h, beta, gamma)
         # Abstand bis Drehteller vom Ursprung
-        pointphix, pointphiy = self.plot_line(0, 0, np.radians(0), self.h_m, name="hm", color='k-')
+        point_phi_x, point_phi_y = self.plot_line(0, 0, np.radians(0), self.h_m, name="hm", color='k-')
         self.ax.plot(self.h_m, 0, 'kx')
         self.ax.text(self.h_m, -0.3, 'h_m')
         # Untere Bodenlinie
-        pointpsix, pointpsiy = self.plot_line(0, 0, np.radians(0), self.h_b, name="hb", color='k-')
+        point_psi_x, point_psi_y = self.plot_line(0, 0, np.radians(0), self.h_b, name="hb", color='k-')
         self.ax.plot(self.h_b, 0, 'kx')
         self.ax.text(self.h_b, -0.3, 'h_b')
-        # Wand
-        topx, topy = self.plot_line(pointpsix, pointpsiy, np.pi - psi, 1.3*b, plot=False)
-        self.plot_line(topx, topy, 2*np.pi-psi, 2.6*b, color='k-')
         # Drehteller
-        circlele = plt.Circle((pointphix, pointphiy), self.l_e, color='k', linestyle='dashed', fill=False)
+        circlele = plt.Circle((point_phi_x, point_phi_y), self.l_e, color='k', linestyle='dashed', fill=False)
         self.ax.add_artist(circlele)    
         # Winkelhalbierende
-        pointbx, pointby = self.plot_line(0,0, alpha, h, name="h", color='g-')
+        point_b_x, point_b_y = self.plot_line(0,0, alpha, h, name="h", color='g-')
         # Winkelhalbierende bis Kreismittelpunkt
-        pointrx, pointry = self.plot_line(0, 0, alpha, h_r, name="hr", color = 'b-')
+        point_r_x, point_r_y = self.plot_line(0, 0, alpha, h_r, name="hr", color = 'b-')
         # Abstand Mitte Drehteller, Mitte Zylinder
-        self.ax.plot((self.h_m, pointrx), (0, pointry), 'y-', label='l_e')
-        self.ax.plot(pointrx, pointry, 'kx')
-        self.ax.text(pointrx, pointry-0.3, 'M')
+        self.ax.plot((self.h_m, point_r_x), (0, point_r_y), 'y-', label='l_e')
+        self.ax.plot(point_r_x, point_r_y, 'kx')
+        self.ax.text(point_r_x, point_r_y-0.3, 'M')
         # Zylinder
-        circler = plt.Circle((pointrx,pointry), self.l_r, color='k', fill=False)
+        circler = plt.Circle((point_r_x,point_r_y), self.l_r, color='k', fill=False)
         self.ax.add_artist(circler)
+        # x,y Koordinate der Punkt b_top und b_bottom bestimmen
+        b_top_x, b_top_y = self.plot_line(point_b_x, point_b_y, np.pi-psi, b_top, plot=False)
+        b_bottom_x, b_bottom_y = self.plot_line(point_b_x, point_b_y, 2*np.pi-psi, b_bottom, plot=False)
+        # Wand
+        if b_bottom_y > point_psi_y and b_top_y > point_psi_y:  # Schatten oberhalb der Mittellinie
+            kathete_top_a = np.abs(b_bottom_x-point_psi_x)
+            kathete_top_b = np.abs(b_bottom_y-point_psi_y)
+            len_top = 2*np.sqrt(kathete_top_a**2+kathete_top_b**2)+b
+            len_bottom = 1
+        elif b_bottom_y < point_psi_y and b_top_y < point_psi_y:  # Schatten unterhalb der Mittellinie            
+            kathete_bottom_a = np.abs(b_top_x-point_psi_x)
+            kathete_bottom_b = np.abs(b_top_y-point_psi_y)
+            len_bottom = 2*np.sqrt(kathete_bottom_a**2+kathete_bottom_b**2)+b
+            len_top = 1
+        else:  # Schatten ober- und unterhalb der Mittellinie
+            kathete_top_a = np.abs(b_top_x-point_psi_x)
+            kathete_top_b = np.abs(b_top_y-point_psi_y)
+            len_top = np.sqrt(kathete_top_a**2+kathete_top_b**2) + 1
+            kathete_bottom_a = np.abs(b_bottom_x-point_psi_x)
+            kathete_bottom_b = np.abs(b_bottom_y-point_psi_y)
+            len_bottom = np.sqrt(kathete_bottom_a**2+kathete_bottom_b**2) + 1 
+        self.plot_line(point_psi_x, point_psi_y, np.pi-psi, len_top, color="k-")  # obere Haelfte
+        self.plot_line(point_psi_x, point_psi_y, 2*np.pi-psi, len_bottom, color="k-") # untere Haelfte
         # b an Wand
-        btopx, btopy = self.plot_line(pointbx, pointby, np.pi-psi, b_top, plot=False)
-        self.plot_line(btopx, btopy, 2*np.pi-psi, b, name="b", color='r-')
-        bbottomx, bbottomy = self.plot_line(pointbx, pointby, 2*np.pi-psi, b_bottom, plot=False)
+        self.plot_line(b_top_x, b_top_y, 2*np.pi-psi, b, name="b", color='r-')
         # Unterer Scheitel
-        self.ax.plot((0, bbottomx), (0, bbottomy), 'c-.')
-        self.ax.plot(bbottomx, bbottomy, 'kx')
+        self.ax.plot((0, b_bottom_x), (0, b_bottom_y), 'c-.')
+        self.ax.plot(b_bottom_x, b_bottom_y, 'kx')
         # Oberer Scheitel
-        self.ax.plot((0, btopx), (0, btopy), 'c-.')
-        self.ax.plot(btopx, btopy, 'kx')
+        self.ax.plot((0, b_top_x), (0, b_top_y), 'c-.')
+        self.ax.plot(b_top_x, b_top_y, 'kx')
         self.ax.axis('equal')
         if self.show_legend:
             self.ax.legend()
@@ -139,5 +157,5 @@ class Vorwaertsproblem():
 
 
 if __name__ == '__main__':
-     vorwaertsproblem = Vorwaertsproblem()
+     vorwaertsproblem = Vorwaertsproblem(show_legend=False)
      vorwaertsproblem.plot()

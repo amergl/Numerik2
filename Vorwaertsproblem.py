@@ -5,7 +5,7 @@ import vorwaerts as vw
 
 class Vorwaertsproblem():
     
-    def __init__(self, l_e=1, l_r=0.5, h_m=2, h_b=20, phi_0=135, delta_phi=45, psi=75):
+    def __init__(self, l_e=10, l_r=3, h_m=30, h_b=90, phi_0=135, delta_phi=45, psi=90):
         self.l_e = l_e
         self.l_r = l_r
         self.h_m = h_m
@@ -19,7 +19,7 @@ class Vorwaertsproblem():
         self.fig.canvas.set_window_title('Numerik DGL 2 - Schattenprojektion')
         self.fig.suptitle('Vorwaertsproblem')
         plt.subplots_adjust(bottom=0.3)
-        plt.axis([0, 25, -10, 10])
+        plt.axis([0, 200, -100, 100])
         plt.axis('equal')
         axColor = 'lightgoldenrodyellow'
         
@@ -137,5 +137,5 @@ class Vorwaertsproblem():
 
 
 if __name__ == '__main__':
-     vorwaertsproblem = Vorwaertsproblem(psi=110)
+     vorwaertsproblem = Vorwaertsproblem()
      vorwaertsproblem.plot()

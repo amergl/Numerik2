@@ -5,7 +5,7 @@ import vorwaerts as vw
 
 class Vorwaertsproblem():
     
-    def __init__(self, l_e=1, l_r=0.5, h_m=2, h_b=20, phi_0=135, delta_phi=45, psi=75):
+    def __init__(self, l_e=10, l_r=3, h_m=30, h_b=90, phi_0=135, delta_phi=45, psi=90, show_legend=True):
         self.l_e = l_e
         self.l_r = l_r
         self.h_m = h_m
@@ -13,13 +13,14 @@ class Vorwaertsproblem():
         self.phi = phi_0
         self.delta_phi = delta_phi 
         self.psi = psi 
+        self.show_legend = show_legend
         
     def initUI(self):
         self.fig, self.ax = plt.subplots()
         self.fig.canvas.set_window_title('Numerik DGL 2 - Schattenprojektion')
         self.fig.suptitle('Vorwaertsproblem')
         plt.subplots_adjust(bottom=0.3)
-        plt.axis([0, 25, -10, 10])
+        plt.axis([0, 200, -100, 100])
         plt.axis('equal')
         axColor = 'lightgoldenrodyellow'
         
@@ -122,7 +123,8 @@ class Vorwaertsproblem():
         self.ax.plot((0, btopx), (0, btopy), 'c-.')
         self.ax.plot(btopx, btopy, 'kx')
         self.ax.axis('equal')
-        self.ax.legend()
+        if self.show_legend:
+            self.ax.legend()
         
     def plot_line(self, pointx, pointy, angle, distance, plot=True, name=None, color='-'):
         x = np.cos(angle)*distance+pointx
@@ -137,5 +139,5 @@ class Vorwaertsproblem():
 
 
 if __name__ == '__main__':
-     vorwaertsproblem = Vorwaertsproblem(psi=110)
+     vorwaertsproblem = Vorwaertsproblem()
      vorwaertsproblem.plot()

@@ -5,8 +5,8 @@ from vorwaerts import vorwaerts
 from scipy.optimize import minimize, fmin
 from Vorwaertsproblem import Vorwaertsproblem
 import numpy as np
-import time
-
+from time import time
+from sys import argv
 
 
 def newton(F,x0,eps=1e-5,alpha=1.05e-4):
@@ -50,11 +50,21 @@ def rueckwaerts(n, z, l_r):
     x_0 = np.array([10, 30, np.radians(90), np.radians(90), 90], dtype=np.float64)
 
     for method in [ "CG", "BFGS", "COBYLA",]:
+        t0=time()
         res = minimize(lambda x: np.linalg.norm(F(x), np.inf), x_0, method=method)
-        print("Minimize ({method}): \tResiduum = {residuum}, \tx = {x}".format(method=method, residuum=np.linalg.norm(F(res.x), np.inf), x=res.x))
+        duration=time()-t0
+        if compare:
+            print("%-20s \tResiduum = %e, \tx = %s, \tduration=%4fs"%("Minimize (%s):"%method, np.linalg.norm(F(res.x), np.inf),res.x,duration))
+    t0=time()
     res = fmin(lambda x: np.linalg.norm(F(x), np.inf), x_0, disp=0)
-    print("Fmin: \t\tResiduum = {residuum}, \tx = {x}".format(residuum=np.linalg.norm(F(res), np.inf), x=res))
+    duration=time()-t0
+    if compare:
+        print("%-20s \tResiduum = %e, \tx = %s, \tduration=%4fs"%("Fmin:",np.linalg.norm(F(res), np.inf), res,duration))
+    t0=time()
     x, residuum = newton(F, x_0, alpha=5e-4)
+    duration=time()-t0
+    if compare:
+        print "%-20s \tResiduum = %e, \tx = %s, \tduration=%4fs"%("NumII-Team:",residuum,x,duration)
     return x, residuum
     
 def print_x(title, x):    
@@ -68,10 +78,15 @@ def print_x(title, x):
     print("-------------------------------\n")
 
 if __name__ == "__main__":
+    compare=False
+    if len(argv) > 1 and argv[1] == "compare":
+        compare=True
     n = 30
-    print("Measurements: \t{n}".format(n=n))    
+    if not compare:
+        print("Measurements: \t\t{n}".format(n=n))    
     delta_phi = 360/n
-    print("Delta Phi: \t\t{delta} degrees\n".format(delta=delta_phi))
+    if not compare:
+        print("Delta Phi: \t\t{delta} degrees\n".format(delta=delta_phi))
     l_r = 0.3
     l_e = 11
     h_m = 27.32    
@@ -80,13 +95,14 @@ if __name__ == "__main__":
     h_b = 89.8
     x_exact = [l_e, h_m , np.radians(phi_0), np.radians(psi), h_b]
     
-    tstart = time.time()
+    tstart = time()
     x_calc, residuum = rueckwaerts(n, x_exact, l_r)
-    duration = time.time() - tstart
-    print_x("\nExact x:", x_exact)
-    print_x("Calculated x:", x_calc)
-    print("Residuum: \t{residuum}".format(residuum=residuum))
-    print("Duration: \t{duration} seconds".format(duration=duration))
+    duration = time() - tstart
+    if not compare:
+        print_x("\nExact x:", x_exact)
+        print_x("Calculated x:", x_calc)
+        print("Residuum: \t{residuum}".format(residuum=residuum))
+        print("Duration: \t{duration} seconds".format(duration=duration))
     
     #vorwaertsproblem = Vorwaertsproblem(l_e, l_r, h_m, h_b, phi_0, delta_phi, psi, show_legend=False)
     #vorwaertsproblem.plot()

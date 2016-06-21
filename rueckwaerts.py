@@ -7,11 +7,15 @@ from scipy.optimize import minimize,fmin
 
 from time import *
 
+
+fstring="%-20s Residuum = %e, x = %s"
+
 def newton(F,x0,eps=1e-5,alpha=1.05e-4):
     it=int(1e2)
     x=copy(x0)
     Fx=F(x)
 
+    residuum2=0
     residuum=linalg.norm(Fx,inf)
     while residuum > eps and it > 0:
         dFx=jacobi(F,x)
@@ -23,14 +27,18 @@ def newton(F,x0,eps=1e-5,alpha=1.05e-4):
         xalpha=dot(R,Fx)
         x-=xalpha
 
+
         residuum2=linalg.norm(Fx)
-	if residuum2-residuum > 0:
-            alpha/=2
-        if abs(residuum2/residuum) > 0.9:
-	    alpha/=2
+        rel_error=(residuum-residuum2)/residuum
+	if residuum2 > residuum:
+            alpha*=rel_error
         elif residuum > residuum2:
-	    alpha*=4
+	    alpha/=rel_error
 #        alpha=min(5e-5,residuum2/residuum)
+#        print abs(residuum-residuum2),(residuum-residuum2)/residuum,residuum,alpha
+        if abs(residuum2-residuum) < eps:
+            break
+        
 	residuum=residuum2
         #svd=linalg.svd(A,compute_uv=0)
 #	print residuum#,svd
@@ -45,13 +53,11 @@ def rueckwaerts(n,z,l_r):
 
     for method in [ "CG","BFGS","COBYLA",]:
         res=minimize(lambda x:linalg.norm(F(x),inf),x0,method=method)
-        print "Minimize(%s): Residuum = %f, x = %s"%(method,linalg.norm(F(res.x),inf),res.x)
+        print fstring%("Minimize(%s)"%method,linalg.norm(F(res.x),inf),res.x)
     res=fmin(lambda x:linalg.norm(F(x),inf),x0,disp=0)
-    print "Fmin: Residuum = %f, x = %s"%(linalg.norm(F(res),inf),res)
+    print fstring%("Fmin",linalg.norm(F(res),inf),res)
     x,residuum=newton(F,x0, alpha=5e-4)
-    print x
-
-    return residuum
+    return x,residuum
     
 def print_x(x):    
 #    print("Param \tValue")
@@ -76,7 +82,7 @@ if __name__ == "__main__":
     x=[l_e,h_m,phi0,psi,h_b]
     print_x(x)
        
-    residuum=rueckwaerts(n,x,l_r)
-    print "X actually is",x
-    print "Residuum is",residuum
+    z,residuum=rueckwaerts(n,x,l_r)
+    print fstring%("NumII-Team",residuum,z)
+    print "\nX actually is",x
     

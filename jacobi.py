@@ -20,14 +20,16 @@ def jacobi(g,x,delta=1e-4):
     n=x.shape[0]
     J=zeros((m,n))
 
-    for i in range(m):
-        for j in range(n):
-            xtilde=copy(x)
-            xtilde[j]+=delta
+    for j in range(n):
+        xtilde=copy(x)
+        xtilde[j]+=delta
+        for i in range(m):
             J[i,j]+=f(xtilde)[i]
-            xtilde[j]-=2*delta
+        xtilde[j]-=2*delta
+        for i in range(m):
             J[i,j]-=f(xtilde)[i]
-            J[i,j]/=2.0*delta
+    
+    J/=2.0*delta
     return J
 
 if __name__ == "__main__":

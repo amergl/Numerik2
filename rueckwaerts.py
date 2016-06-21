@@ -14,10 +14,11 @@ def newton(F,x0,eps=1e-5,alpha=1.05e-4):
     x=np.copy(x0)
     Fx=F(x)
 
+    breakit=int(argv[2]) if len(argv) > 2  else 5
     residuum2=0
     residuum=np.linalg.norm(Fx,np.inf)
     diff=abs(residuum-residuum2)
-    while residuum > eps and it > 0 and diff > eps:
+    while residuum > eps and it > 0 and diff > eps and breakit > 0:
         dFx = jacobi(F, x)
         
         # Tikhonov regularisation
@@ -32,9 +33,12 @@ def newton(F,x0,eps=1e-5,alpha=1.05e-4):
 	if residuum2 > residuum:
             x+=xalpha
             Fx=F(x)
-            alpha-=diff
+            alpha/=2
             alpha=min(1,abs(alpha))
-	residuum=residuum2
+            breakit-=1
+	else:
+            residuum=residuum2
+            breakit=int(argv[2]) if len(argv) > 2  else 5
         it-=1
 
     return x, residuum
@@ -44,9 +48,9 @@ def rueckwaerts(n, z, l_r):
     F = lambda x: np.array([abs(vorwaerts(i[0], x, l_r)-i[1]) for i in inp], dtype=np.float64)
     x_0 = np.array([10, 30, np.radians(90), np.radians(90), 90], dtype=np.float64)
     
-    if compare:
-        print("Method \t\tResiduum \t\t\tx = [l_e, h_m, phi_0, psi, h_b] \t\t\t\t\tDuration")
-        print("".ljust(155, "-"))
+    #if compare:
+        #print("Method \t\tResiduum \t\t\tx = [l_e, h_m, phi_0, psi, h_b] \t\t\t\t\tDuration")
+        #print("".ljust(155, "-"))
 
     for method in [ "CG", "BFGS", "COBYLA",]:
         t0=time()

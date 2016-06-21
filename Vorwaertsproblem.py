@@ -76,6 +76,8 @@ class Vorwaertsproblem():
         
     def onDraw(self):
         self.ax.cla()  # clear the axes 
+        self.ax.margins(x=.1, y=.1)  # add margins
+        self.ax.autoscale(enable=False)
         psi = np.radians(self.psi)
         phi = np.radians(self.phi)
         # Werte berechnen
@@ -126,10 +128,10 @@ class Vorwaertsproblem():
         else:  # Schatten ober- und unterhalb der Mittellinie
             kathete_top_a = np.abs(b_top_x-point_psi_x)
             kathete_top_b = np.abs(b_top_y-point_psi_y)
-            len_top = np.sqrt(kathete_top_a**2+kathete_top_b**2) + 1
+            len_top = np.sqrt(kathete_top_a**2+kathete_top_b**2) + 5
             kathete_bottom_a = np.abs(b_bottom_x-point_psi_x)
             kathete_bottom_b = np.abs(b_bottom_y-point_psi_y)
-            len_bottom = np.sqrt(kathete_bottom_a**2+kathete_bottom_b**2) + 1 
+            len_bottom = np.sqrt(kathete_bottom_a**2+kathete_bottom_b**2) + 5 
         self.plot_line(point_psi_x, point_psi_y, np.pi-psi, len_top, color="k-")  # obere Haelfte
         self.plot_line(point_psi_x, point_psi_y, 2*np.pi-psi, len_bottom, color="k-") # untere Haelfte
         # b an Wand

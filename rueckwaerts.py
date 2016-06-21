@@ -16,30 +16,25 @@ def newton(F,x0,eps=1e-5,alpha=1.05e-4):
 
     residuum2=0
     residuum=np.linalg.norm(Fx,np.inf)
-    while residuum > eps and it > 0:
+    diff=abs(residuum-residuum2)
+    while residuum > eps and it > 0 and diff > eps:
         dFx = jacobi(F, x)
         
         # Tikhonov regularisation
-        Fx = F(x)
         A = dFx
         R = np.dot(np.linalg.inv(np.dot(A.T, A) + alpha * np.eye(A.shape[1])), A.T)
         xalpha = np.dot(R, Fx)
         x -= xalpha
-
-        residuum2=np.linalg.norm(Fx)
-        rel_error=(residuum-residuum2)/residuum
-	if residuum2 > residuum:
-            alpha*=rel_error
-        elif residuum > residuum2:
-	    alpha/=rel_error
-#        alpha=min(5e-5,residuum2/residuum)
-#        print abs(residuum-residuum2),(residuum-residuum2)/residuum,residuum,alpha
-        if abs(residuum2-residuum) < eps:
-            break
+        Fx = F(x)
         
+        residuum2=np.linalg.norm(Fx)
+        diff=abs(residuum-residuum2)
+	if residuum2 > residuum:
+            x+=xalpha
+            Fx=F(x)
+            alpha-=diff
+            alpha=min(1,abs(alpha))
 	residuum=residuum2
-        #svd=linalg.svd(A,compute_uv=0)
-#	print residuum#,svd
         it-=1
 
     return x, residuum

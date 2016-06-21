@@ -43,6 +43,10 @@ def rueckwaerts(n, z, l_r):
     inp = np.array([[np.radians(float(i)/n * 360), vorwaerts(np.radians(float(i)/n * 360), x=z, l_r=l_r)] for i in range(n+1)], dtype=np.float64)
     F = lambda x: np.array([abs(vorwaerts(i[0], x, l_r)-i[1]) for i in inp], dtype=np.float64)
     x_0 = np.array([10, 30, np.radians(90), np.radians(90), 90], dtype=np.float64)
+    
+    if compare:
+        print("Method \t\tResiduum \t\t\tx = [l_e, h_m, phi_0, psi, h_b] \t\t\t\t\tDuration")
+        print("".ljust(155, "-"))
 
     for method in [ "CG", "BFGS", "COBYLA",]:
         t0=time()
@@ -78,7 +82,7 @@ if __name__ == "__main__":
         compare=True
     n = 30
     if not compare:
-        print("Measurements: \t\t{n}".format(n=n))    
+        print("Measurements: \t{n}".format(n=n))    
     delta_phi = 360/n
     if not compare:
         print("Delta Phi: \t\t{delta} degrees\n".format(delta=delta_phi))
